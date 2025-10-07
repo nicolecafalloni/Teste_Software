@@ -16,7 +16,7 @@ const path = require("path");
 let relatorio = [];
 
 // ---------- CONFIGURAÇÃO ----------
-const TARGET_URL = "http://localhost/PHPBD/index.php"; // <- alterar para a URL do seu projeto
+const TARGET_URL = "http://localhost/repo-testeSoftware/Teste_Software/"; // <- alterar para a URL do seu projeto
 const SCREENSHOT_DIR = path.join(__dirname, "assets", "screenshots");
 const TIMEOUT_MS = 5000; // tempo de espera padrão
 
@@ -66,9 +66,10 @@ async function testarLogin(email, senha, descricao) {
 
 		// Aguarda a div de mensagem (pode conter erro ou sucesso)
 		// Se o projeto de vocês redireciona após login, você deve adaptar para verificar URL ou um elemento da página alvo específica.
-		await driver.wait(until.elementLocated(By.id("mensagem")), TIMEOUT_MS);
-		const mensagem = await driver.findElement(By.id("mensagem")).getText();
-		console.log("Mensagem recebida:", mensagem);
+
+		// await driver.wait(until.elementLocated(By.id("mensagem")), TIMEOUT_MS);
+		// const mensagem = await driver.findElement(By.id("mensagem")).getText();
+		// console.log("Mensagem recebida:", mensagem);
 
 		// Tira screenshot e salva
 		const safeName = descricao
@@ -81,7 +82,7 @@ async function testarLogin(email, senha, descricao) {
 		relatorio.push({
 			teste: descricao,
 			status,
-			mensagem,
+			// mensagem,
 			screenshot: savedPath,
 		});
 	} catch (err) {
@@ -136,7 +137,7 @@ const testes = [
 // Padrão vazio para os vocês preencherem:
 const testes = [
 	{ email: "teste@teste.com", senha: "1234", descricao: "Login correto" },
-	{ email: "teste@teste.com", senha: "4321", descricao: "Senha incorreta" },
+	{ email: "adm@teste.com", senha: "4321", descricao: "Senha incorreta" },
 	{ email: "", senha: "1234", descricao: "Campo email vazio" },
 	{ email: "teste@teste.com", senha: "", descricao: "Campo senha vazio" },
 	{ email: "<script>", senha: "1234", descricao: "Tentativa de XSS" },

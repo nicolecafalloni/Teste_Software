@@ -17,7 +17,7 @@ $sucesso = $_GET['sucesso'] ?? null;
 </head>
 <body>
     <div class="login-container">
-        <form class="auth-form" id="loginForm" action="processa_login.php" method="POST">
+        <form class="auth-form" id="loginForm" action="php/processa_login.php" method="POST">
             <h1>Acesso Seguro</h1>
             <p>Entre com suas credenciais.</p>
             
@@ -31,7 +31,7 @@ $sucesso = $_GET['sucesso'] ?? null;
                 <input type="password" id="senha" name="senha" required placeholder="**********">
             </div>
             
-            <button type="submit" class="purple-button">Entrar</button>
+            <button type="submit" id="btn-login" class="purple-button">Entrar</button>
             
             <span class="link-cadastro">Não tem conta? <a href="cadastro.php">Cadastre-se aqui</a></span>
         </form>
