@@ -1,6 +1,10 @@
 <?php
-// Exemplo de inclusão para mostrar o SweetAlert via backend
+// login.php
+
+// Pega os parâmetros da URL para exibir o SweetAlert
+// 'erro' pode ser: invalido, vazio, xss
 $erro = $_GET['erro'] ?? null;
+// 'sucesso' pode ser: cadastrado
 $sucesso = $_GET['sucesso'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -11,8 +15,6 @@ $sucesso = $_GET['sucesso'] ?? null;
     <title>ACME Login | Seguro</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./js/assets.js">
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -40,15 +42,31 @@ $sucesso = $_GET['sucesso'] ?? null;
     <script src="assets/js/validation.js"></script>
     
     <script>
-        // Lógica para disparar o SweetAlert quando houver um parâmetro na URL
+        // Função para mostrar o SweetAlert
+        function showSweetAlert(title, text, icon) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonText: 'OK'
+            });
+        }
+
+        // Lógica para disparar o SweetAlert baseado nos parâmetros da URL (do PHP)
         const erro = '<?php echo $erro; ?>';
         const sucesso = '<?php echo $sucesso; ?>';
 
         if (erro === 'invalido') {
-             // Credenciais inválidas (falha de login)
+            // Credenciais inválidas (falha de login) [cite: 19]
             showSweetAlert('Erro de Login', 'Credenciais inválidas. Verifique seu e-mail e senha.', 'error');
+        } else if (erro === 'vazio') {
+            // Campos vazios [cite: 19]
+            showSweetAlert('Preenchimento Obrigatório', 'Por favor, preencha todos os campos.', 'warning');
+        } else if (erro === 'xss') {
+            // Tentativa de XSS/SQL Injection detectada [cite: 20]
+            showSweetAlert('Entrada Inválida', 'Tentativa de entrada inválida detectada. O servidor bloqueou a requisição.', 'error');
         } else if (sucesso === 'cadastrado') {
-            // Sucesso após o cadastro (exemplo de redirecionamento do cadastro.php)
+            // Sucesso após o cadastro [cite: 18]
             showSweetAlert('Sucesso!', 'Cadastro realizado com sucesso. Faça login!', 'success');
         }
     </script>
