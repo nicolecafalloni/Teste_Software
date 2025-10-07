@@ -2,7 +2,7 @@
 require 'conexao.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: cadastro.php');
+    header('Location: cadastrar.php');
     exit;
 }
 
@@ -13,12 +13,12 @@ $confirma_senha = $_POST['confirma_senha'] ?? '';
 
 // Validação
 if (empty($nome) || empty($email) || empty($senha) || empty($confirma_senha)) {
-    header('Location: cadastro.php?erro=vazio');
+    header('Location: cadastrar.php?erro=vazio');
     exit;
 }
 
 if ($senha !== $confirma_senha) {
-    header('Location: cadastro.php?erro=senhas_nao_conferem');
+    header('Location: cadastrar.php?erro=senhas_nao_conferem');
     exit;
 }
 
@@ -28,7 +28,7 @@ $email_seguro = filter_var($email, FILTER_SANITIZE_EMAIL);
 $senha_segura = htmlspecialchars($senha, ENT_QUOTES, 'UTF-8');
 
 if ($nome !== $nome_seguro || $email !== $email_seguro || $senha !== $senha_segura) {
-    header('Location: cadastro.php?erro=xss');
+    header('Location: cadastrar.php?erro=xss');
     exit;
 }
 
@@ -40,7 +40,7 @@ try {
     $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
     $stmt->execute([$email_seguro]);
     if ($stmt->fetch()) {
-        header('Location: cadastro.php?erro=email_existe');
+        header('Location: cadastrar.php?erro=email_existe');
         exit;
     }
 
@@ -48,11 +48,11 @@ try {
     $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
     $stmt->execute([$nome_seguro, $email_seguro, $senha_hash]);
 
-    header('Location: cadastro.php?sucesso=ok');
+    header('Location: cadastrar.php?sucesso=ok');
     exit;
 
 } catch (PDOException $e) {
-    header('Location: cadastro.php?erro=falha_db');
+    header('Location: cadastrar.php?erro=falha_db');
     exit;
 }
 ?>

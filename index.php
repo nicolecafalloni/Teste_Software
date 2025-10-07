@@ -33,7 +33,7 @@ $sucesso = $_GET['sucesso'] ?? null;
             
             <button type="submit" id="btn-login" class="purple-button">Entrar</button>
             
-            <span class="link-cadastro">Não tem conta? <a href="cadastro.php">Cadastre-se aqui</a></span>
+            <span class="link-cadastro">Não tem conta? <a href="php/cadastrar.php">Cadastre-se aqui</a></span>
         </form>
     </div>
 

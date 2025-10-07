@@ -45,7 +45,7 @@ $sucesso = $_GET['sucesso'] ?? null;
             <button type="submit" class="purple-button">Cadastrar Agora</button>
 
             <span class="link-cadastro">
-                Já tem conta? <a href="login.php">Faça Login</a>
+                Já tem conta? <a href="../index.php">Faça Login</a>
             </span>
         </form>
     </div>
