@@ -1,0 +1,32 @@
+[
+  {
+    "teste": "Login correto",
+    "status": "pass",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Login_correto.png"
+  },
+  {
+    "teste": "Senha incorreta",
+    "status": "pass",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Senha_incorreta.png"
+  },
+  {
+    "teste": "Campo email vazio",
+    "status": "pass",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Campo_email_vazio.png"
+  },
+  {
+    "teste": "Campo senha vazio",
+    "status": "pass",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Campo_senha_vazio.png"
+  },
+  {
+    "teste": "Tentativa de XSS",
+    "status": "pass",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Tentativa_de_XSS.png"
+  },
+  {
+    "teste": "Tentativa de SQL Injection",
+    "status": "pass",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Tentativa_de_SQL_Injection.png"
+  }
+]

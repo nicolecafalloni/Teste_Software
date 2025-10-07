@@ -3,7 +3,7 @@
 
 // 1. Verifica se a requisição é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: login.php');
+    header('Location: ../index.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ $senha = $_POST['senha'] ?? '';
 
 // 3. Validação de campos obrigatórios
 if (empty($email) || empty($senha)) {
-    header('Location: login.php?erro=vazio');
+    header('Location: ../index.php?erro=vazio');
     exit;
 }
 
@@ -22,7 +22,7 @@ $email_seguro = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 $senha_segura = htmlspecialchars($senha, ENT_QUOTES, 'UTF-8');
 
 if ($email !== $email_seguro || $senha !== $senha_segura) {
-    header('Location: login.php?erro=xss');
+    header('Location: ../index.php?erro=xss');
     exit;
 }
 
@@ -33,7 +33,7 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
 } catch (PDOException $e) {
-    header('Location: login.php?erro=invalido');
+    header('Location: ../index.php?erro=invalido');
     exit;
 }
 
@@ -44,20 +44,20 @@ $usuario = $stmt->fetch();
 
 if (!$usuario) {
     // E-mail não encontrado
-    header('Location: login.php?erro=invalido');
+    header('Location: ../index.php?erro=invalido');
     exit;
 }
 
 // 7. Verifica senha
 if (!password_verify($senha_segura, $usuario['senha'])) {
     // Senha incorreta
-    header('Location: login.php?erro=invalido');
+    header('Location: ../index.php?erro=invalido');
     exit;
 }
 
-// 8. Login bem-sucedido: inicia sessão e redireciona para painel
+// 8. ../index bem-sucedido: inicia sessão e redireciona para painel
 session_start();
 $_SESSION['usuario_logado'] = $email_seguro;
-header('Location: painel.php');
+header('Location: ../index.php');
 exit;
 ?>
