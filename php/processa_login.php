@@ -1,6 +1,5 @@
 <?php
 // processa_login.php
-
 // 1. Verifica se a requisição é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: login.php');
