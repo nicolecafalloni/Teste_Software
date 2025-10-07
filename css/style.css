@@ -1,0 +1,117 @@
+/* Definições de cores para o tema Roxo */
+:root {
+    --purple-main: #8A2BE2; /* Roxo Principal (Blue Violet) */
+    --purple-dark: #5D3FD3; /* Roxo Escuro */
+    --background-color: #F0F0FF; /* Lavanda muito clara */
+    --text-color: #333;
+    --shadow: 0 10px 30px rgba(138, 43, 226, 0.15); /* Sombra roxa sutil */
+}
+
+/* Reset, Fundo e Centralização */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Contêiner e Formulário */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.auth-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: var(--purple-dark);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.auth-form p {
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Inputs */
+.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--purple-dark);
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--purple-main);
+    outline: none;
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.4);
+}
+
+/* Botão Roxo */
+.purple-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: var(--purple-main);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.purple-button:hover {
+    background-color: var(--purple-dark);
+    transform: translateY(-2px);
+}
+
+/* Links */
+.link-cadastro {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+}
+
+.link-cadastro a {
+    color: var(--purple-main);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.link-cadastro a:hover {
+    color: var(--purple-dark);
+    text-decoration: underline;
+}
