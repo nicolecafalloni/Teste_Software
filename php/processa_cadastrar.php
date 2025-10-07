@@ -1,85 +1,73 @@
 <?php
-// processa_cadastro.php
+// processa_cadastrar.php
 
-// 1. Verificar se a requisição é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: cadastro.php');
     exit;
 }
 
-// 2. Coletar os dados
-$nome = $_POST['nome'] ?? '';
-$email = $_POST['email'] ?? '';
-$senha = $_POST['senha'] ?? '';
-$confirma_senha = $_POST['confirma_senha'] ?? '';
+$nome            = $_POST['nome'] ?? '';
+$email           = $_POST['email'] ?? '';
+$senha           = $_POST['senha'] ?? '';
+$confirma_senha  = $_POST['confirma_senha'] ?? '';
 
-
-// --- REGRAS DE SEGURANÇA E VALIDAÇÃO ---
-
-// 3. Impedir envio com campos vazios
+// 🔹 Validação de campos obrigatórios
 if (empty($nome) || empty($email) || empty($senha) || empty($confirma_senha)) {
     header('Location: cadastro.php?erro=vazio');
     exit;
 }
 
-// 4. Checar se as senhas conferem
+// 🔹 Verificação de senhas
 if ($senha !== $confirma_senha) {
     header('Location: cadastro.php?erro=senhas_nao_conferem');
     exit;
 }
 
-// 5. Tratamento contra XSS e SQL Injection (Sanitização)
-
-// Sanitize/Limpar o nome (removendo tags HTML, mas permitindo letras e espaços)
-$nome_seguro = filter_var($nome, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH); 
-// Sanitize o email
+// 🔹 Sanitização dos dados
+$nome_seguro  = filter_var($nome, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 $email_seguro = filter_var($email, FILTER_SANITIZE_EMAIL);
-// Proteja as senhas (apenas para exibição se necessário, mas o foco é no hash)
 $senha_segura = htmlspecialchars($senha, ENT_QUOTES, 'UTF-8');
 
-
-// Simulação de detecção de XSS: se algum campo sanitizado for drasticamente diferente do original
+// 🔹 Detecção de tentativa de XSS
 if ($nome !== $nome_seguro || $email !== $email_seguro || $senha !== $senha_segura) {
     header('Location: cadastro.php?erro=xss');
     exit;
 }
 
-// 6. Verificar se o E-mail já existe (Simulação de consulta ao DB)
-// EM PRODUÇÃO: Usar Prepared Statements para evitar SQL Injection.
-$email_simulado_existente = 'existente@acme.com'; // Exemplo de um email já cadastrado
+// 🔹 Criptografar senha
+$senha_hash = password_hash($senha_segura, PASSWORD_DEFAULT);
 
-if ($email_seguro === $email_simulado_existente) {
+// 🔹 Conexão com o banco de dados (ajuste conforme seu ambiente)
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=acme', 'root', '', [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+} catch (PDOException $e) {
+    header('Location: cadastro.php?erro=falha_db');
+    exit;
+}
+
+// 🔹 Verifica se o e-mail já existe
+$stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
+$stmt->execute([$email_seguro]);
+if ($stmt->fetch()) {
     header('Location: cadastro.php?erro=email_existe');
     exit;
 }
 
-// 7. Hash da Senha e Inserção no Banco de Dados
-
-// Criptografia segura da senha (Obrigatório por segurança)
-$senha_hash = password_hash($senha_segura, PASSWORD_DEFAULT);
-
-// AQUI entraria o código real de conexão e inserção no banco de dados.
-/*
-$pdo = new PDO('...');
+// 🔹 Inserir novo usuário
 $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
-if ($stmt->execute([$nome_seguro, $email_seguro, $senha_hash])) {
-    // Sucesso
-} else {
-    // Falha de DB
-    header('Location: cadastro.php?erro=falha_db');
-    exit;
-}
-*/
 
-// SIMULAÇÃO DE SUCESSO DE CADASTRO
-$cadastro_sucesso = true;
-
-if ($cadastro_sucesso) {
-    // 8. Redirecionar para a tela de Login com a notificação de sucesso
-    header('Location: login.php?sucesso=cadastrado');
-    exit;
-} else {
-    // 9. Se a simulação falhar (ou se o DB falhar no futuro)
+try {
+    if ($stmt->execute([$nome_seguro, $email_seguro, $senha_hash])) {
+        header('Location: cadastro.php?sucesso=ok');
+        exit;
+    } else {
+        header('Location: cadastro.php?erro=falha_db');
+        exit;
+    }
+} catch (PDOException $e) {
     header('Location: cadastro.php?erro=falha_db');
     exit;
 }
