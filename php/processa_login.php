@@ -1,5 +1,9 @@
 <?php
 // processa_login.php
+// ATENÇÃO: Se o seu index.php está na raiz, o redirecionamento para ele é `../index.php`
+// Se o seu index.php está na mesma pasta, o redirecionamento é `index.php`
+// Vamos manter `../index.php` conforme seu código original.
+
 // 1. Verifica se a requisição é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../index.php');
@@ -32,7 +36,8 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
 } catch (PDOException $e) {
-    header('Location: ../index.php?erro=invalido');
+    // Erro crítico de conexão
+    header('Location: ../index.php?erro=conexao'); 
     exit;
 }
 
@@ -41,22 +46,18 @@ $stmt = $pdo->prepare("SELECT id, senha FROM usuarios WHERE email = ?");
 $stmt->execute([$email_seguro]);
 $usuario = $stmt->fetch();
 
-if (!$usuario) {
-    // E-mail não encontrado
-    header('Location: ../index.php?erro=invalido');
-    exit;
-}
-
 // 7. Verifica senha
-if (!password_verify($senha_segura, $usuario['senha'])) {
-    // Senha incorreta
+if (!$usuario || !password_verify($senha_segura, $usuario['senha'])) {
+    // E-mail não encontrado OU Senha incorreta
     header('Location: ../index.php?erro=invalido');
     exit;
 }
 
-// 8. ../index bem-sucedido: inicia sessão e redireciona para painel
+// 8. Login bem-sucedido: inicia sessão e redireciona para painel COM parâmetro de sucesso
 session_start();
 $_SESSION['usuario_logado'] = $email_seguro;
-header('Location: ../index.php');
+// Assumindo que a página restrita é `painel.php` ou o próprio `index.php` (se ele for o painel).
+// Vamos redirecionar para um painel.php após mostrar o alerta de sucesso.
+header('Location: ../index.php?sucesso=login'); // Redireciona para o index para mostrar o alerta.
 exit;
 ?>

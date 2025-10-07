@@ -42,7 +42,7 @@ $sucesso = $_GET['sucesso'] ?? null;
                 <input type="password" id="confirma_senha" name="confirma_senha" required placeholder="Repita a senha">
             </div>
 
-            <button type="submit" class="purple-button">Cadastrar Agora</button>
+            <button type="submit" id="cadastro_btn" class="purple-button">Cadastrar Agora</button>
 
             <span class="link-cadastro">
                 Já tem conta? <a href="../index.php">Faça Login</a>

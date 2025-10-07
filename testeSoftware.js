@@ -136,10 +136,11 @@ const testes = [
 
 // Padrão vazio para os vocês preencherem:
 const testes = [
-	{ email: "teste@teste.com", senha: "1234", descricao: "Login correto" },
-	{ email: "adm@teste.com", senha: "4321", descricao: "Senha incorreta" },
+	{ email: "teste@gmail.com", senha: "1234", descricao: "Login correto" },
+	{ email: "teste@gmail.com", senha: "4321", descricao: "Senha incorreta" },
+    { email: "teste@teste.com", senha: "4321", descricao: "Email incorreta" },
 	{ email: "", senha: "1234", descricao: "Campo email vazio" },
-	{ email: "teste@teste.com", senha: "", descricao: "Campo senha vazio" },
+	{ email: "teste@gmail.com", senha: "", descricao: "Campo senha vazio" },
 	{ email: "<script>", senha: "1234", descricao: "Tentativa de XSS" },
     { email: "' OR '1'='1", senha: "1234", descricao: "Tentativa de SQL Injection" },
 ];

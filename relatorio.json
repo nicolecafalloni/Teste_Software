@@ -1,32 +1,44 @@
 [
   {
-    "teste": "Login correto",
+    "teste": "Cadastro correto (sucesso=ok)",
     "status": "pass",
-    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Login_correto.png"
+    "mensagem_alerta": "Seu cadastro foi realizado com êxito! Faça login para continuar.",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshotcadastro_Cadastro_correto_sucessook.png"
   },
   {
-    "teste": "Senha incorreta",
-    "status": "pass",
-    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Senha_incorreta.png"
+    "teste": "Email vazio (erro=vazio)",
+    "status": "fail",
+    "mensagem_alerta": "",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_erro_Email_vazio_errovazio.png"
   },
   {
-    "teste": "Campo email vazio",
-    "status": "pass",
-    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Campo_email_vazio.png"
+    "teste": "Senha Vazia (erro=vazio)",
+    "status": "fail",
+    "mensagem_alerta": "",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_erro_Senha_Vazia_errovazio.png"
   },
   {
-    "teste": "Campo senha vazio",
-    "status": "pass",
-    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Campo_senha_vazio.png"
+    "teste": "Campo de confirmar senha vazio (erro=vazio)",
+    "status": "fail",
+    "mensagem_alerta": "",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_erro_Campo_de_confirmar_senha_vazio_errovazio.png"
   },
   {
-    "teste": "Tentativa de XSS",
+    "teste": "Email existente (erro=email_existe)",
     "status": "pass",
-    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Tentativa_de_XSS.png"
+    "mensagem_alerta": "Seu cadastro foi realizado com êxito! Faça login para continuar.",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshotcadastro_Email_existente_erroemail_existe.png"
   },
   {
-    "teste": "Tentativa de SQL Injection",
+    "teste": "Senhas diferentes (erro=senhas_nao_conferem)",
     "status": "pass",
-    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshot_Tentativa_de_SQL_Injection.png"
+    "mensagem_alerta": "A senha e a confirmação de senha não conferem.",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshotcadastro_Senhas_diferentes_errosenhas_nao_conferem.png"
+  },
+  {
+    "teste": "Tentativa de XSS (erro=xss)",
+    "status": "pass",
+    "mensagem_alerta": "Tentativa de entrada inválida detectada. O servidor bloqueou a requisição.",
+    "screenshot": "C:\\xampp\\htdocs\\repo-testeSoftware\\Teste_Software\\assets\\screenshots\\screenshotcadastro_Tentativa_de_XSS_erroxss.png"
   }
 ]
