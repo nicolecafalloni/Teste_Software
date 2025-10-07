@@ -16,7 +16,7 @@ const path = require("path");
 let relatorio = [];
 
 // ---------- CONFIGURAÇÃO ----------
-const TARGET_URL = "http://localhost/PHPBD/index.php"; // <- alterar para a URL do seu projeto
+const TARGET_URL = "http://localhost/repo-testeSoftware/Teste_Software/"; // <- alterar para a URL do seu projeto
 const SCREENSHOT_DIR = path.join(__dirname, "assets", "screenshots");
 const TIMEOUT_MS = 5000; // tempo de espera padrão
 
