@@ -1,14 +1,20 @@
-/* Definições de cores para o tema Roxo */
+/* Definições de cores para o tema Roxo (Violeta) */
 :root {
     --purple-main: #8A2BE2; /* Roxo Principal (Blue Violet) */
-    --purple-dark: #5D3FD3; /* Roxo Escuro */
-    --background-color: #F0F0FF; /* Lavanda muito clara */
-    --text-color: #333;
+    --purple-dark: #5D3FD3; /* Roxo Escuro para hover e detalhes */
+    --background-color: #F0F0FF; /* Lavanda muito clara (fundo suave) */
+    --text-color: #333; /* Cor do texto principal */
     --shadow: 0 10px 30px rgba(138, 43, 226, 0.15); /* Sombra roxa sutil */
+    --border-radius: 15px; /* Adicionado para consistência */
+    --button-radius: 50px; /* Adicionado para consistência */
 }
 
-/* Reset, Fundo e Centralização */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Reset Básico e Fonte */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -17,9 +23,10 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: var(--text-color); /* Herdado por todos os elementos */
 }
 
-/* Contêiner e Formulário */
+/* --- Contêiner e Formulário Principal --- */
 .login-container {
     width: 100%;
     max-width: 400px;
@@ -29,13 +36,14 @@ body {
 .auth-form {
     background-color: white;
     padding: 40px;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Títulos e Subtítulos */
 h1 {
     color: var(--purple-dark);
     margin-bottom: 5px;
@@ -46,9 +54,10 @@ h1 {
     color: var(--text-color);
     margin-bottom: 30px;
     font-size: 14px;
+    text-align: center;
 }
 
-/* Inputs */
+/* --- Agrupamento de Input e Label --- */
 .input-group {
     width: 100%;
     margin-bottom: 20px;
@@ -73,10 +82,10 @@ h1 {
 .input-group input:focus {
     border-color: var(--purple-main);
     outline: none;
-    box-shadow: 0 0 8px rgba(138, 43, 226, 0.4);
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.4); /* Efeito de foco roxo */
 }
 
-/* Botão Roxo */
+/* --- Botão de Ação Roxo --- */
 .purple-button {
     width: 100%;
     padding: 12px;
@@ -84,19 +93,24 @@ h1 {
     background-color: var(--purple-main);
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: var(--button-radius); /* Botão em formato de pílula */
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s; /* Adicionando shadow para hover */
 }
 
 .purple-button:hover {
     background-color: var(--purple-dark);
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efeito de elevação sutil */
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4); /* Sombra de elevação */
 }
 
-/* Links */
+.purple-button:active {
+    transform: translateY(0); /* Efeito de clique */
+}
+
+/* --- Links Adicionais (Login/Cadastro) --- */
 .link-cadastro {
     margin-top: 20px;
     font-size: 14px;
@@ -114,4 +128,12 @@ h1 {
 .link-cadastro a:hover {
     color: var(--purple-dark);
     text-decoration: underline;
+}
+
+/* --- Responsividade (Melhoria para telas menores) --- */
+@media (max-width: 500px) {
+    .auth-form {
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
 }
